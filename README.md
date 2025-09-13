@@ -60,4 +60,65 @@ JavaScript/React Hooks: تعاملات دینامیک، انیمیشن‌ها و
 📌 خلاصه:
 
 این پروژه یک سایت خدمات کامل و مدرن است که با استفاده از React.js، HTML، CSS و Bootstrap طراحی شده و صفحات متنوع برای معرفی خدمات، نمایش جزئیات، ثبت درخواست و تعامل با کاربران فراهم می‌کند.
-🌟 مناسب برای نمونه کار شخصی یا پرتفولیو و نمایش مهارت‌های طراحی UI/UX و برنامه‌نویسی فرانت‌اند.
+🌟 مناسب برای نمونه کار شخصی یا پرتفولیو و نمایش مهارت‌های طراحی UI/UX و برنامه‌نویسی فرانت‌اند 
+#english
+
+🌟 Project Title: Service Pages
+
+Project Description:
+This project is a modern and visually appealing website for showcasing services, designed with a focus on user-friendly interface and creative UI.
+The main goal is to present services in a clear, organized, and visually striking way, providing an excellent user experience for visitors 🚀.
+
+💡 Key Features:
+
+🏠 Service Overview Page
+
+Display all services as attractive cards or blocks ✨
+
+Categorization of services for quick and easy access 🔍
+
+Animated effects on hover for engaging interactions 🎨
+
+📄 Service Detail Page
+
+Detailed description of each service with related images and icons 🖼️
+
+Option to add a short introduction video for each service 🎥
+
+FAQ or important notes section for users ❓
+
+📩 Service Request / Contact Form
+
+Simple and responsive form for service requests, bookings, or consultation ✍️
+
+Form validation with JavaScript to prevent user errors ✅
+
+📱 Responsive & Modern Design
+
+Built with Bootstrap 5 for fast and responsive layouts
+
+Fully compatible with mobile, tablet, and desktop devices 💻📱
+
+Organized layout with harmonious colors 🌈
+
+🛠️ Technologies & Skills Used:
+
+React.js ⚛️: Modern page structure and component management
+
+HTML5 & CSS3: Standard semantic structure and beautiful design
+
+Bootstrap 5: Fast and responsive design
+
+JavaScript / React Hooks 💫: Dynamic interactions, animations, and form handling
+
+Clean and maintainable code 🧹
+
+🎁 Additional & Creative Features:
+
+Attractive animations for service sections and cards ✨
+
+Graphical representation of popularity or service pricing 💲
+
+Filter and quick search functionality for services 🔎
+
+Modern and visually appealing design to build trust and engagement 😍
