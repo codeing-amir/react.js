@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پلتفرم خدمات تخصصی | React ExpertHub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding-top: 80px;
+        }
+
+        .navbar {
+            background: var(--gradient);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 1rem;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            margin: 0 0.3rem;
+            transition: all 0.3s;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(78, 84, 200, 0.85), rgba(143, 148, 251, 0.85)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .search-box {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .search-box input {
+            padding: 1.2rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            font-size: 1.1rem;
+        }
+
+        .search-box button {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            border-radius: 50px;
+            padding: 0.85rem 1.5rem;
+            background: var(--gradient);
+            border: none;
+        }
+
+        .stats-counter {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0 1.5rem;
+            border-left: 1px solid #eee;
+        }
+
+        .stat-item:last-child {
+            border-left: none;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            line-height: 1.2;
+        }
+
+        .stat-text {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .expert-card {
+            transition: transform 0.4s, box-shadow 0.4s;
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            position: relative;
+        }
+
+        .expert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .expert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .expert-img {
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.4s;
+        }
+
+        .expert-card:hover .expert-img {
+            transform: scale(1.05);
+        }
+
+        .expert-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .online-status {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--success);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .rating {
+            color: #ffc107;
+        }
+
+        .filter-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem;
+            position: sticky;
+            top: 90px;
+            z-index: 100;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(78, 84, 200, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 84, 200, 0.4);
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            height: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            background: var(--gradient);
+            color: white;
+        }
+
+        .category-card:hover .category-icon {
+            background: white;
+            color: var(--primary);
+        }
+
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.8rem;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            margin: 1rem 0.5rem;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 5rem;
+            color: var(--light);
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-family: Arial;
+            line-height: 1;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+            margin: 0.8rem auto;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-right: 5px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 0.3rem;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form {
+            position: relative;
+        }
+
+        .newsletter-form input {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            width: 100%;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .newsletter-form button {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            border-radius: 50px;
+            padding: 0.5rem 1.2rem;
+            background: var(--gradient);
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 0;
+                border-radius: 0 0 20px 20px;
+            }
+
+            .stat-item {
+                border-left: none;
+                border-bottom: 1px solid #eee;
+                padding: 1rem 0;
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
+            }
+
+            .stats-counter {
+                margin-top: 0;
+            }
+        }
+
+        /* انیمیشن‌های سفارشی */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* اسکرول بار سفارشی */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-brain me-2"></i>React ExpertHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> خانه</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-users me-1"></i> متخصصان</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-layer-group me-1"></i> دسته‌بندی‌ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-question-circle me-1"></i> چگونه کار می‌کند؟</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-blog me-1"></i> وبلاگ</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-light me-2"><i class="fas fa-sign-in-alt me-1"></i> ورود</a>
+                    <a href="#" class="btn btn-light"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- بخش هیرو -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3" data-aos="fade-down">پلتفرم متخصصین خدمات</h1>
+            <p class="lead mb-4" data-aos="fade-down" data-aos-delay="100">متخصصان برتر را پیدا کرده و مستقیماً استخدام کنید</p>
+
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="search-box" data-aos="fade-up" data-aos-delay="200">
+                        <input type="text" class="form-control form-control-lg" placeholder="جستجو بر اساس نام، تخصص یا مهارت...">
+                        <button class="btn btn-primary"><i class="fas fa-search me-1"></i> جستجو</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4" data-aos="fade-in" data-aos-delay="300">
+                <div class="col-md-12">
+                    <div class="d-flex flex-wrap justify-content-center">
+                        <span class="badge bg-light text-dark m-1 p-2">طراحی وب</span>
+                        <span class="badge bg-light text-dark m-1 p-2">توسعه نرم‌افزار</span>
+                        <span class="badge bg-light text-dark m-1 p-2">گرافیک و طراحی</span>
+                        <span class="badge bg-light text-dark m-1 p-2">سئو و بازاریابی</span>
+                        <span class="badge bg-light text-dark m-1 p-2">محتوا و ترجمه</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- آمار و ارقام -->
+    <div class="container">
+        <div class="stats-counter" data-aos="fade-up">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <span class="stat-number">۱,۲۴۵</span>
+                        <span class="stat-text">متخصص فعال</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <span class="stat-number">۳,۷۸۹</span>
+                        <span class="stat-text">پروژه انجام شده</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <span class="stat-number">۹۸%</span>
+                        <span class="stat-text">رضایت مشتریان</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <span class="stat-number">۴۵</span>
+                        <span class="stat-text">دسته‌بندی خدمات</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- دسته‌بندی‌ها -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">دسته‌بندی‌های خدمات</h2>
+
+            <div class="row">
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h5>توسعه وب</h5>
+                        <p class="small text-muted">۲۴۵ متخصص</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h5>اپلیکیشن موبایل</h5>
+                        <p class="small text-muted">۱۸۷ متخصص</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h5>طراحی UI/UX</h5>
+                        <p class="small text-muted">۱۶۵ متخصص</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h5>بازاریابی دیجیتال</h5>
+                        <p class="small text-muted">۲۱۰ متخصص</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4" data-aos="fade-up">
+                <a href="#" class="btn btn-outline-primary">مشاهده همه دسته‌بندی‌ها <i class="fas fa-arrow-left me-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش فیلترها و متخصصان -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">متخصصان برتر</h2>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="filter-section" data-aos="fade-right">
+                        <h5 class="mb-4">فیلترها</h5>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">دسته‌بندی</label>
+                            <select class="form-select">
+                                <option selected>همه دسته‌بندی‌ها</option>
+                                <option>توسعه وب</option>
+                                <option>طراحی UX/UI</option>
+                                <option>برنامه‌نویسی موبایل</option>
+                                <option>سئو و بازاریابی</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">مهارت‌ها</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="reactCheck">
+                                <label class="form-check-label" for="reactCheck">React</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="nodeCheck">
+                                <label class="form-check-label" for="nodeCheck">Node.js</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="uiCheck">
+                                <label class="form-check-label" for="uiCheck">UI Design</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pythonCheck">
+                                <label class="form-check-label" for="pythonCheck">Python</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">امتیاز</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ratingRadio" id="ratingAll" checked>
+                                <label class="form-check-label" for="ratingAll">همه امتیازها</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ratingRadio" id="rating4">
+                                <label class="form-check-label" for="rating4">۴ ستاره و بالاتر</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ratingRadio" id="rating45">
+                                <label class="form-check-label" for="rating45">۴.۵ ستاره و بالاتر</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">سطح تجربه</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="beginnerCheck">
+                                <label class="form-check-label" for="beginnerCheck">تازه کار</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="mediumCheck" checked>
+                                <label class="form-check-label" for="mediumCheck">متوسط</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="expertCheck" checked>
+                                <label class="form-check-label" for="expertCheck">حرفه‌ای</label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary w-100">اعمال فیلترها</button>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="row">
+                        <!-- متخصص ۱ -->
+                        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="expert-card card">
+                                <span class="expert-badge">پرتقاضا</span>
+                                <div class="online-status"></div>
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="expert-img card-img-top" alt="سارا محمدی">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h5 class="card-title mb-0">سارا محمدی</h5>
+                                        <span class="rating">★★★★★<span class="text-muted"> (۴.۸)</span></span>
+                                    </div>
+                                    <h6 class="text-muted">توسعه‌دهنده فرانت‌اند</h6>
+                                    <p class="card-text">توسعه‌دهنده با تجربه در حوزه فرانت‌اند با بیش از 5 سال سابقه کار</p>
+                                    <div class="mb-3">
+                                        <span class="skill-tag">React</span>
+                                        <span class="skill-tag">JavaScript</span>
+                                        <span class="skill-tag">CSS</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold">ساعتی ۱۲۰,۰۰۰ تومان</span>
+                                        <button class="btn btn-primary btn-sm">مشاهده</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- متخصص ۲ -->
+                        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="expert-card card">
+                                <div class="online-status"></div>
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="expert-img card-img-top" alt="علی رضایی">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h5 class="card-title mb-0">علی رضایی</h5>
+                                        <span class="rating">★★★★★<span class="text-muted"> (۴.۹)</span></span>
+                                    </div>
+                                    <h6 class="text-muted">طراح UX/UI</h6>
+                                    <p class="card-text">طراح تجربه کاربری با تخصص در طراحی اپلیکیشن‌های موبایل</p>
+                                    <div class="mb-3">
+                                        <span class="skill-tag">Figma</span>
+                                        <span class="skill-tag">Adobe XD</span>
+                                        <span class="skill-tag">User Research</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold">ساعتی ۱۵۰,۰۰۰ تومان</span>
+                                        <button class="btn btn-primary btn-sm">مشاهده</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- متخصص ۳ -->
+                        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="expert-card card">
+                                <span class="expert-badge">جدید</span>
+                                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="expert-img card-img-top" alt="محمد حسینی">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h5 class="card-title mb-0">محمد حسینی</h5>
+                                        <span class="rating">★★★★☆<span class="text-muted"> (۴.۷)</span></span>
+                                    </div>
+                                    <h6 class="text-muted">توسعه‌دهنده بک‌اند</h6>
+                                    <p class="card-text">متخصص در توسعه سرویس‌های بک‌اند و پایگاه داده</p>
+                                    <div class="mb-3">
+                                        <span class="skill-tag">Node.js</span>
+                                        <span class="skill-tag">Python</span>
+                                        <span class="skill-tag">MongoDB</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold">ساعتی ۱۴۰,۰۰۰ تومان</span>
+                                        <button class="btn btn-primary btn-sm">مشاهده</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- دکمه مشاهده بیشتر -->
+                    <div class="text-center mt-4" data-aos="fade-up">
+                        <button class="btn btn-outline-primary">مشاهده متخصصان بیشتر <i class="fas fa-arrow-left me-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش نظرات -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">نظرات کاربران</h2>
+
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="testimonial-avatar me-3" alt="امین احمدی">
+                            <div>
+                                <h5 class="mb-0">امین احمدی</h5>
+                                <p class="text-muted mb-0">کارفرما</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">با استفاده از این پلتفرم توانستم بهترین متخصص را برای پروژه‌ام پیدا کنم. کیفیت کار عالی و قیمت‌ها منصفانه بود.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="testimonial-avatar me-3" alt="فاطمه کریمی">
+                            <div>
+                                <h5 class="mb-0">فاطمه کریمی</h5>
+                                <p class="text-muted mb-0">متخصص سئو</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">از زمانی که در این پلتفرم فعالیت می‌کنم، پروژه‌های منظم و باکیفیتی دریافت می‌کنم. فضای کاری بسیار حرفه‌ای است.</p>
+                        <div class="rating">★★★★☆</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="testimonial-avatar me-3" alt="رضا موسوی">
+                            <div>
+                                <h5 class="mb-0">رضا موسوی</h5>
+                                <p class="text-muted mb-0">مدیر پروژه</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">پلتفرم فوق‌العاده‌ای برای پیدا کردن متخصصین بااستعداد. سیستم امتیازدهی شفاف کمک زیادی به انتخاب بهترین‌ها می‌کند.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA بخش -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="mb-4" data-aos="fade-up">همین امروز شروع کنید</h2>
+            <p class="lead mb-4" data-aos="fade-up" data-aos-delay="100">به جامعه متخصصان ما بپیوندید یا پروژه خود را ثبت کنید</p>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <a href="#" class="btn btn-light btn-lg me-3">ثبت‌نام به عنوان متخصص</a>
+                <a href="#" class="btn btn-outline-light btn-lg">ثبت پروژه</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="mb-4">React ExpertHub</h4>
+                    <p>پلتفرم ارتباط متخصصان و کارفرمایان برای انجام پروژه‌های حرفه‌ای</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="mb-4">لینک‌های مفید</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">درباره ما</a></li>
+                        <li><a href="#">قوانین و مقررات</a></li>
+                        <li><a href="#">سوالات متداول</a></li>
+                        <li><a href="#">تماس با ما</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="mb-4">خدمات</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">توسعه وب</a></li>
+                        <li><a href="#">طراحی UI/UX</a></li>
+                        <li><a href="#">برنامه‌نویسی</a></li>
+                        <li><a href="#">بازاریابی</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <h5 class="mb-4">عضویت در خبرنامه</h5>
+                    <p>برای دریافت جدیدترین پروژه‌ها و اخبار در ایمیل خود عضو شوید</p>
+                    <div class="newsletter-form mt-3">
+                        <input type="email" class="form-control" placeholder="آدرس ایمیل شما">
+                        <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="text-center">
+                <p>کلیه حقوق مادی و معنوی این سایت محفوظ می‌باشد © ۱۴۰۲</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // راه‌اندازی AOS برای انیمیشن‌ها
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                easing: 'ease-in-out'
+            });
+
+            // شبیه‌سازی بارگذاری متخصصان
+            const loadMoreBtn = document.querySelector('.btn-outline-primary');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    this.innerHTML = 'در حال بارگذاری... <div class="spinner-border spinner-border-sm me-2"></div>';
+                    setTimeout(() => {
+                        this.innerHTML = 'متخصصان بیشتری بارگذاری شد!';
+                        this.classList.remove('btn-outline-primary');
+                        this.classList.add('btn-success');
+                    }, 1500);
+                });
+            }
+
+            // تغییر وضعیت آنلاین/آفلاین
+            setInterval(() => {
+                const onlineStatuses = document.querySelectorAll('.online-status');
+                onlineStatuses.forEach(status => {
+                    if (Math.random() > 0.3) {
+                        status.style.backgroundColor = '#28a745';
+                    } else {
+                        status.style.backgroundColor = '#6c757d';
+                    }
+                });
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
